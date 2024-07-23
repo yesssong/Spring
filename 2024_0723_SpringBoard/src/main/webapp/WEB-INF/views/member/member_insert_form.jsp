@@ -175,7 +175,7 @@
 					<tr>
 						<td colspan="2" align="center">
 							<input class="btn btn-success" type="button" value="메인화면"
-									onclick="location.href='../photo/list.do'">
+									onclick="location.href='../board/list.do'">
 							<input id="btn_register" class="btn btn-primary" type="button" value="가입하기" disabled="disabled"
 								onclick="send(this.form);">
 						</td>

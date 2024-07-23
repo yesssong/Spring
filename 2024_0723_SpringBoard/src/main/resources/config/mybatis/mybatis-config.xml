@@ -10,10 +10,12 @@
 	
 	<typeAliases>
 		<typeAlias type="vo.MemberVo" alias="member"/>
+		<typeAlias type="vo.BoardVo" alias="board"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/member.xml" />
+		<mapper resource="config/mybatis/mapper/board.xml" />
 	</mappers>
 	
 </configuration>

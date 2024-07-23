@@ -104,7 +104,7 @@
       	
       	<tr>
       		<td colspan="2" align="center">
-      			<input class="btn btn-success" type="button" value="메인화면" onclick="location.href='../photo/list.do'"> <!-- 클릭하면 메인화면으로 돌아가겠다 -->
+      			<input class="btn btn-success" type="button" value="메인화면" onclick="location.href='../board/list.do'"> <!-- 클릭하면 메인화면으로 돌아가겠다 -->
       			<input class="btn btn-primary" type="button" value="로그인" onclick="send(this.form);">
       		
       		</td>

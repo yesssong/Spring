@@ -75,7 +75,7 @@
 		}
 		///member/login_form.do?reason=session_timeout
 		if("${ param.reason == 'session_timeout'}"=="true"){		// PhotoInsertAction에 대한 내용 추가(세션 만료 안내)
-			alert("로그아웃 되었습니다");
+			alert("로그아웃 되었습니다/n로그인 후 게시물을 등록하세요");
 		}
 		
 	}

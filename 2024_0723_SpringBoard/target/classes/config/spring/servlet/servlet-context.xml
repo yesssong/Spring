@@ -24,6 +24,7 @@
 	
 	
 	<!-- 객체 자동생성 Auto-Detecting -->
+	<context:component-scan base-package="dao" />		<!-- dao 안에 컴포넌트 있는지 찾아보고 있으면 자동생성 -->
 	<context:component-scan base-package="controller" />
 	
 	<!-- 수동생성 -->

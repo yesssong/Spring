@@ -6,7 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.MemberVo;
 
-public class MemberDao {
+// MemberDao를 재정의한 객체
+public class MemberDaoImpl implements MemberDao{
 	
 	// mybatis
 	SqlSession sqlSession;  // SqlSessionTemplate의 interface
@@ -17,42 +18,43 @@ public class MemberDao {
 	}
 	
 	// 전체조회
+	@Override
 	public List<MemberVo> selectList() {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList("member.member_list");
 	}
 
-	// mem_idx에 해당하는 1건의 정보 얻어온다
+	// mem_idx에 해당되는 1건의 정보 얻어온다
 	public MemberVo selectOne(int mem_idx) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("member.member_one_idx");
-	}
 
-	// mem_id에 해당되는 1건의 정보 얻어오기
+		return sqlSession.selectOne("member.member_one_idx", mem_idx);
+	}
+	
+	
+	// mem_id 에 해당되는 1건의 정보 얻어온다
 	public MemberVo selectOne(String mem_id) {
 
 		return sqlSession.selectOne("member.member_one_id", mem_id);
-	} // end : selectOne
-
+	}
 
 	public int insert(MemberVo vo) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.insert("member.member_insert", vo);
-	}
 
-	
+	}//end:insert()
+
 	public int delete(int mem_idx) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.delete("member.member_delete", mem_idx);
-	}
 
+	}//end:delete()
 
 	public int update(MemberVo vo) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.update("member.member_update", vo);
-	}
-	
+
+	}//end:update()
 	
 
 }

@@ -123,14 +123,14 @@ public class MemberController {
 		// 로그인 처리 : 현재 로그인 된 객체 user의 정보를 session에 저장
 		session.setAttribute("user", user);
 		
-		return "redirect:../photo/list.do";
+		return "redirect:../board/list.do";
 	}// end : login
 	
 	// 로그아웃
 	@RequestMapping("logout.do")
 	public String logout() {
 		session.removeAttribute("user");
-		return "redirect:../photo/list.do";
+		return "redirect:../board/list.do";
 	}
 	
 	
@@ -194,7 +194,7 @@ public class MemberController {
 			session.setAttribute("user", user);
 		}
 		
-		return "redirect:../photo/list.do";		// 수정 후 메인화면으로 이동
+		return "redirect:../board/list.do";		// 수정 후 메인화면으로 이동
 	}
 	
 	

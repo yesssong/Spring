@@ -96,7 +96,7 @@
 			<!-- 로그인 된 경우 -->
 			<c:if test="${not empty sessionScope.user}">
 				<b>${ sessionScope.user.mem_name }</b>님 환영합니다
-				<input class="btn btn-primary" type="button" value="로그아웃" onclick="location.href='login_form.do'">		<!-- LogoutAction 만들기 -->
+				<input class="btn btn-primary" type="button" value="로그아웃" onclick="location.href='logout.do'">		<!-- LogoutAction 만들기 -->
 			</c:if>
 		</div>
 		
