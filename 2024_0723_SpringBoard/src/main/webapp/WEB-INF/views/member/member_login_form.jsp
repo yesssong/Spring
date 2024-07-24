@@ -87,6 +87,7 @@
 
 <body>
 <form>
+<input type="hidden" name="url" value="${ param.url }">  <!-- 세션 트래킹 -->
 	<div id="box">
 		<div class="panel panel-success">
       <div class="panel-heading"><h5>로그인</h5></div>

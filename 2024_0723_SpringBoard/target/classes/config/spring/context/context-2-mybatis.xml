@@ -19,6 +19,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 	      
 	      new SqlSessionTemplate(factoryBean)
 	 -->	
+	 <!-- spring에서 만든 mybatis 객체 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="factoryBean" />
 	</bean>

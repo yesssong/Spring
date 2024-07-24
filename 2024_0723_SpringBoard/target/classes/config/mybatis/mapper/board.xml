@@ -33,6 +33,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </insert>
    <!-- vo 안에 있는 정보 꺼내 쓴 것  -->
    
+    <!-- 답글쓰기 -->
+   <insert id="board_reply" parameterType="vo.BoardVo">
+   insert into board values(seq_board_idx.nextVal,
+						 #{b_subject},
+						 #{b_content},
+						 #{b_ip},
+						 sysdate,
+						 0,
+						 'y',
+						 #{mem_idx},
+						 #{mem_name},
+						 #{b_ref},
+						 #{b_step},
+						 #{b_depth}
+						 )
+   </insert>
+   <!--  #{b_ref}, #{b_step}, #{b_depth} => controller에서 정한 값을 그대로 들고 온것  -->
    
    
    <!-- 조회수 증가 -->
@@ -43,7 +60,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </update>
    
    
+   <!-- 답글쓰기 -> 기준 글 보다 step이 큰 게시물의 step을 1씩 증가시키는 작업(답글 넣기 전처리 작업 -> 답글 넣을 자리 마련)  -->
+   <update id="board_update_step" parameterType="vo.BoardVo">
+	   update board set b_step = b_step+1
+	  				where b_ref=#{b_ref} and b_step > #{b_step}  
+   </update>
+   <!--  where b_ref=#{b_ref} and b_step > #{b_step} => 같은 글 중에서 step이 기준 글보다 큰 애 -->
    
+   
+   <!-- 삭제 처리 -> b_use를 'n'으로 변경 -->
+   							  <!-- b_idx를 인자로 받으므로 int -->
+   <update id="board_update_b_use" parameterType="int">
+   		update board set b_use='n' where b_idx=#{ b_idx }
+   </update>
+   
+   <!-- 수정하기 -->
+  <update id="board_update"  parameterType="board">
+      update board set b_subject=#{b_subject},
+                       b_content=#{b_content},
+                       b_ip=#{b_ip},
+                       b_regdate=sysdate
+      where b_idx=#{b_idx}                   
+  </update>
 </mapper>
 
 

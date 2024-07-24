@@ -83,7 +83,8 @@ insert into board values(seq_board_idx.nextVal,
 						 2					-- 첫번째 댓글에 댓글 -> 대댓글이므로 깊이가 2번
 						 )	 						 
 						 						 						 						 
-select * from board order by b_idx desc, b_step asc  -- 최신글이 상단에 위치
+select * from board order by b_ref desc, b_step asc  -- 최신글이 상단에 위치
+
 
 
 

@@ -1,5 +1,4 @@
 package controller;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class MemberController {
 	// 생성자 만들어지는 확인하기 위한 코드 굳이 만들 필요X
 	public MemberController() {
 		// TODO Auto-generated constructor stub
-		System.out.println("--- MemberController() ---");
+		System.out.println("--MemberController()--");
 	}
 	
 	
@@ -88,8 +87,6 @@ public class MemberController {
 		return "redirect:login_form.do";   // 회원 가입 후 로그인창으로 이동
 	}
 	
-	
-	
 	// 로그인 폼 띄우기
 	// class RequestMapping + metode RequestMapping => /member/ + login_form.do
 	@RequestMapping("login_form.do")
@@ -98,9 +95,12 @@ public class MemberController {
 		return "member/member_login_form";
 	}
 	
+	
+	
+	
 	// 로그인
 	@RequestMapping("login.do")						// redirect할 때 넘어가는 정보들을 DS
-	public String login(String mem_id, String mem_pwd,RedirectAttributes ra) {
+	public String login(String mem_id, String mem_pwd, String url, RedirectAttributes ra) {
 		
 		MemberVo user = member_dao.selectOne(mem_id);
 		
@@ -123,7 +123,12 @@ public class MemberController {
 		// 로그인 처리 : 현재 로그인 된 객체 user의 정보를 session에 저장
 		session.setAttribute("user", user);
 		
-		return "redirect:../board/list.do";
+		// 로그인 안 되어 있으면
+		if(url.isEmpty())
+			return"redirect:../board/list.do";
+		else
+			return"redirect:" + url;
+		
 	}// end : login
 	
 	// 로그아웃

@@ -42,10 +42,38 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.board_one", b_idx);
 	}
 
+	// 조회수 증가
 	@Override
 	public int update_readhit(int b_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("board.board_update_readhit", b_idx);		// board 맵퍼에 b_idx에 해당하는 게시물의 조회수를 수정
+	}
+
+	// 답글 기능 -> b_step 증가
+	@Override
+	public int update_step(BoardVo baseVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.board_update_step", baseVo);
+	}
+
+	// 답글 기능
+	@Override
+	public int reply(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("board.board_reply", vo);
+	}
+
+	// 삭제
+	@Override
+	public int update_delete(int b_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.board_update_b_use", b_idx);		// 삭제 정보를 업뎃
+	}
+
+	@Override
+	public int update(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("board.board_update", vo);
 	}
 
 }
