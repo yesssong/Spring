@@ -85,14 +85,28 @@ public class CommentController {
 		
 		// json데이터 받기
 		JSONObject json = new JSONObject();
-		json.put("result", res=1);		// res=1(행 하나 추가 됐느냐) -> 제대로 insert 됐는지 묻는 것
+		json.put("result", res==1);		// res=1(행 하나 추가 됐느냐) -> 제대로 insert 됐는지 묻는 것
 										// {"result":true} or {"result":false}로 처리
 		
 		return json.toString();		// json 데이터 반환
 	}
 	
 	
-	
+	// /comment/insert.do?cmt_idx=5
+	@RequestMapping(value="delete.do", produces="applcation/json; charset=utf-8;")  // ; 세미콜론 주의
+	@ResponseBody
+	public String delete(int cmt_idx) {
+		
+		int res = comment_dao.delete(cmt_idx);
+		
+		// json데이터 받기
+		JSONObject json = new JSONObject();
+		json.put("result", res==1);		// res=1(행 하나 추가 됐느냐) -> 제대로 insert 됐는지 묻는 것
+										// {"result":true} or {"result":false}로 처리
+		
+		return json.toString();		// json 데이터 반환
+		
+	}
 	
 	
 	

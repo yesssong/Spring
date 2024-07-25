@@ -85,13 +85,29 @@ insert into board values(seq_board_idx.nextVal,
 						 						 						 						 
 select * from board order by b_ref desc, b_step asc  -- 최신글이 상단에 위치
 
+-- 댓글 paging menu
+select
+	rank() over(order by b_ref desc, b_step asc) as no,
+	b.*
+from
+	(select * from board)b
 
 
+-- 해당 게시물에 연결된 댓글의 갯수
+select nvl(count(*),0) from comment_tb where b_idx=27  -- 27번재 글의 댓글 갯수   nvl(count(*),0)->값이 null일 때 0? 
 
 
-
-
-
+-- paging menu + 해당 게시물에 연결된 댓글의 갯수  =>  board.xml mapper에 작성
+select * from		-- select문을 다시 select -> 'no' 때문에(sql문 실행 순서 상 필요한 작업)
+(
+	select
+		rank() over(order by b_ref desc, b_step asc) as no,
+		b.*,
+		(select nvl(count(*),0) from comment_tb where b_idx=b.b_idx) as cmt_count  -- b_idx=b.b_idx <- 변수처리(?번째 댓글 갯수 구해야하므로)
+	from
+		(select * from board)b
+)
+where no between 1 and 5   -- 한 페이지에 5개씩 나옴  숫자 변수 처리 할 것 start, end -> 이 갯수는 MyCommon에서 조정 가능
 
 
 

@@ -51,7 +51,7 @@
 		
 		if(confirm("정말 삭제하시겠습니까?") == false) return;
 		
-		location.href="delete.do?b_idx=${vo.b_idx}"
+		location.href="delete.do?b_idx=${vo.b_idx}";
 		
 	}// end:del()
 
@@ -96,6 +96,7 @@
 			   
 			   //작성했던 댓글 입력창에서 지우기
 			   $("#cmt_content").val("");
+				
 				if(res_data.result == false){
 					alert("댓글 등록 실패!");
 					return;
@@ -109,8 +110,14 @@
 		
 	}// end: comment_insert()
 	
+	// 전역변수 선언
+	var g_page=1;	// comment_list.jsp에서 사용
+	
 	// 댓글 목록 요청 코드
 	function comment_list(page){
+		
+		g_page = page;	// comment_list.jsp 작업 후 추가한 내용
+		
 		$.ajax({
 			url		:	"../comment/list.do",
 			data	:	{"b_idx":"${vo.b_idx}", "page":page},

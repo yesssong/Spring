@@ -10,6 +10,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		select * from board order by b_ref desc, b_step asc
    </select>
    
+   <!-- 댓글 paging menu + 해당 게시물에 연결된 댓글의 갯수  -->
+	<select id="board_page_list" parameterType="Map" resultType="vo.BoardVo">
+		select * from		 <!-- select문을 다시 select -> 'no' 때문에(sql문 실행 순서 상 필요한 작업) -->
+		(
+			select
+				rank() over(order by b_ref desc, b_step asc) as no,
+				b.*,
+				(select nvl(count(*),0) from comment_tb where b_idx=b.b_idx) as cmt_count  
+			from
+				(select * from board)b
+		)
+		where no between #{start} and #{end}   <!-- 한 페이지에 댓글 몇 개씩 출력할지 -> MyCommon에서 설정 가능 -->
+	</select>
+	
+	<!-- 전체 게시물 수 구하기 -->
+	<select id="board_row_total" parameterType="Map" resultType="int">
+		select nvl(count(*),0) from board	
+	</select>
+	
    <!-- b_idx에 해당되는 게시물 1건 얻어오기 -->
    <select id="board_one" parameterType="int" resultType="vo.BoardVo">
    	select * from board where b_idx=#{b_idx}
